@@ -13,7 +13,7 @@ const Header = () => {
 	const [openMoreSitesModal, setOpenMoreSitesModal] = useState(false)
 	const [active, seActive] = useState({ data: true })
 	return (
-		<nav className='w-screen h-14 shadow-md flex items-center gap-2 bg-white sticky top-0 left-0'>
+		<nav className='w-screen h-14 shadow-md flex items-center gap-2 bg-white sticky top-0 left-0 z-50'>
 			<Link className='border-r-2 h-full flex items-center px-3' to='/'>
 				<img src={logo} alt='logo' className='w-6 cursor-pointer' />
 			</Link>
