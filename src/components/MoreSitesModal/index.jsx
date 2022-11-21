@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import polymerlogo from '../../assets/svg/polymer-logo.svg'
 import FlexGem from '../../assets/svg/flixgem.svg'
 import YCA from '../../assets/svg/YCA.svg'
@@ -6,9 +6,14 @@ import SheetHacks from '../../assets/svg/sh-logo.svg'
 import InterveiwG from '../../assets/svg/lightbulb.svg'
 import GitAwesome from '../../assets/svg/search.svg'
 import { BsArrowRight } from 'react-icons/bs'
+import useClickOutside from '../../hooks/useClickOutside'
 const MoreSitesModal = ({ setOpen }) => {
+	const ref = useRef()
+	useClickOutside(ref, () => {
+		setOpen(false)
+	})
 	return (
-		<div className='w-[600px]  border-2 rounded-xl shadow-lg absolute top-12 right-48 p-3 px-6'>
+		<div className='w-[600px]  border-2 rounded-xl shadow-lg absolute top-12 right-48 p-3 px-6 bg-white' ref={ref}>
 			<div
 				className='flex gap-3 rounded-full relative border-2 shadow-xl px-3 py-2 hover:bg-gray-100 cursor-pointer'
 				onClick={() => {

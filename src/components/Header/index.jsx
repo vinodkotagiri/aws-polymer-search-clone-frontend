@@ -7,11 +7,13 @@ import animatedPolymerLogo from '../../assets/images/animated-polymer-logo.gif'
 import { FcMenu } from 'react-icons/fc'
 import { MdClose } from 'react-icons/md'
 import MoreSitesModal from '../../components/MoreSitesModal'
+
 import { Link } from 'react-router-dom'
 const Header = () => {
 	const [isRightMenuVisibe, setIsRightMenuVisibe] = useState(false)
 	const [openMoreSitesModal, setOpenMoreSitesModal] = useState(false)
 	const [active, seActive] = useState({ data: true })
+
 	return (
 		<nav className='w-screen h-14 shadow-md flex items-center gap-2 bg-white sticky top-0 left-0 z-50'>
 			<Link className='border-r-2 h-full flex items-center px-3' to='/'>

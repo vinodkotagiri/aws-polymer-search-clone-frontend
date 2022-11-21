@@ -3,6 +3,7 @@ import { FiSearch } from 'react-icons/fi'
 import { CgCalendarDates } from 'react-icons/cg'
 import { AiOutlineLink } from 'react-icons/ai'
 import animatedPolymerLogo from '../../assets/images/animated-polymer-logo.gif'
+import SiderItem from '../SiderItem'
 const Sider = () => {
 	return (
 		<div className='w-[20vw] h-screen border-r-2 overflow-y-scroll sticky left-0 top-[calc(100vh-3.5rem)] flex flex-col'>
@@ -26,13 +27,14 @@ const Sider = () => {
 				</div>
 			</div>
 			<div className='flex flex-col mt-2 gap-1'>
-				<div className='bg-white mx-2 flex items-center'>
+				<div className='bg-white mx-2 flex items-center cursor-pointer'>
 					<div className='w-[6px] bg-blue-500 h-10 rounded-l-md'></div>
 					<div className='flex justify-between flex-1 px-3 text-xs text-gray-600 font-medium'>
 						<div>Service Name</div>
 						<div>168 +</div>
 					</div>
 				</div>
+				{/* <SiderItem /> */}
 				<div className='bg-white mx-2 flex items-center'>
 					<div className='w-[6px] bg-red-500 h-10 rounded-l-md'></div>
 					<div className='flex justify-between flex-1 px-3 text-xs text-gray-600 font-medium'>
@@ -191,12 +193,14 @@ const Sider = () => {
 				</div>
 			</div>
 			{/* LINKS END */}
-			<button
-				className='outline-none mx-12 mt-6 mb-3 w-auto px-1 rounded-lg py-2 flex gap-1 items-center text-white bg-blue-600 hover:bg-black'
-				onClick={() => window.open('https://www.polymersearch.com/', '_blank')}>
-				<img src={animatedPolymerLogo} alt='logo' className='h-5' />
-				Built with Polymer
-			</button>
+			<div className='w-full flex items-center justify-center'>
+				<button
+					className='outline-none  mt-6 mb-3 w-2/3 px-1 rounded-lg py-2 flex gap-1 items-center text-white bg-blue-600 hover:bg-black'
+					onClick={() => window.open('https://www.polymersearch.com/', '_blank')}>
+					<img src={animatedPolymerLogo} alt='logo' className='h-5' />
+					Built with Polymer
+				</button>
+			</div>
 			<div className='text-center mb-6 font-semibold text-gray-600'>
 				{new Date().toString().split(' ').splice(1, 4).join(' ')}
 			</div>
