@@ -12,7 +12,7 @@ const FilterModal = () => {
 	const ref = useRef(null)
 	useClickOutside(ref, () => setActive(false))
 	const data = useSelector((state) => state.repos.currentData)
-	const filteredData = data.data.filter((item, index) => item.data.includes(search))
+	const filteredData = data ? data.data.filter((item, index) => item.data.includes(search)) : []
 	useEffect(() => {
 		dispatch(setSelectedData(selectedItems))
 	}, [selectedItems])

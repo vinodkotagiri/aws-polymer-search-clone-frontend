@@ -8,6 +8,7 @@ import Loader from '../Loader'
 import { useDispatch, useSelector } from 'react-redux'
 import { addReposData } from '../../redux/reducers/repoSlice'
 import Categories from '../Categories'
+import Numericals from '../Numericals'
 const Sider = () => {
 	const [loading, setLoading] = useState(false)
 
@@ -61,7 +62,9 @@ const Sider = () => {
 							<div className='mx-2 text-xs font-semibold'>Numericals</div>
 						</div>
 					</div>
-					<div className='flex flex-col mt-2 gap-1'></div>
+					<div className='flex flex-col mt-2 gap-1'>
+						<Numericals />
+					</div>
 					{/* NUMERICALS END */}
 					{/* BOOLEANS START */}
 					<div className='mt-3'>

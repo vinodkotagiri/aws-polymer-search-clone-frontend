@@ -22,7 +22,7 @@ const Home = () => {
 		if (filteredData.length === 0) setDataToRender(repoData)
 		else setDataToRender(filteredData)
 	}
-	console.table(dataToRender)
+
 	useEffect(() => {
 		setDataToRender(repoData)
 	}, [repoData])

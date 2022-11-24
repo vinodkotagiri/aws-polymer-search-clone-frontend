@@ -18,7 +18,7 @@ const CategoriesItem = ({ data }) => {
 					className='flex justify-between flex-1 px-3 text-xs text-gray-600 font-medium cursor-pointer'
 					onClick={() => {
 						dispatch(toggleOpen())
-						dispatch(setCurrentData({ type: 'categories', title: 'Service Names', data: catArr }))
+						dispatch(setCurrentData({ title: 'Service Names', data: catArr }))
 					}}>
 					<div>Service Names</div>
 					<div>{serviceNames?.length - 25}+</div>
@@ -30,7 +30,7 @@ const CategoriesItem = ({ data }) => {
 					className='flex justify-between flex-1 px-3 text-xs text-gray-600 font-medium cursor-pointer'
 					onClick={() => {
 						dispatch(toggleOpen())
-						dispatch(setCurrentData({ type: 'categories', title: 'Languages', data: lanArr }))
+						dispatch(setCurrentData({ title: 'Languages', data: lanArr }))
 					}}>
 					<div>Languages</div>
 					<div>{language?.length - 25}+</div>
@@ -42,7 +42,7 @@ const CategoriesItem = ({ data }) => {
 					className='flex justify-between flex-1 px-3 text-xs text-gray-600 font-medium cursor-pointer'
 					onClick={() => {
 						dispatch(toggleOpen())
-						dispatch(setCurrentData({ type: 'categories', title: 'License', data: licArr }))
+						dispatch(setCurrentData({ title: 'License', data: licArr }))
 					}}>
 					<div>license</div>
 					<div>{license?.length - 25}+</div>
@@ -54,7 +54,7 @@ const CategoriesItem = ({ data }) => {
 					className='flex justify-between flex-1 px-3 text-xs text-gray-600 font-medium cursor-pointer'
 					onClick={() => {
 						dispatch(toggleOpen())
-						dispatch(setCurrentData({ type: 'categories', title: 'Owner', data: ownArr }))
+						dispatch(setCurrentData({ title: 'Owner', data: ownArr }))
 					}}>
 					<div>Owner</div>
 					<div>{owner?.length - 25}+</div>
@@ -66,7 +66,7 @@ const CategoriesItem = ({ data }) => {
 					className='flex justify-between flex-1 px-3 text-xs text-gray-600 font-medium cursor-pointer'
 					onClick={() => {
 						dispatch(toggleOpen())
-						dispatch(setCurrentData({ type: 'categories', title: 'Search Keywords', data: seaArr }))
+						dispatch(setCurrentData({ title: 'Search Keywords', data: seaArr }))
 					}}>
 					<div>Search Keywords</div>
 					<div>{searchKeywords?.length - 25}+</div>
@@ -78,7 +78,7 @@ const CategoriesItem = ({ data }) => {
 					className='flex justify-between flex-1 px-3 text-xs text-gray-600 font-medium cursor-pointer'
 					onClick={() => {
 						dispatch(toggleOpen())
-						dispatch(setCurrentData({ type: 'categories', title: 'Topics', data: topArr }))
+						dispatch(setCurrentData({ title: 'Topics', data: topArr }))
 					}}>
 					<div>Topics</div>
 					<div>{topics?.length - 25}+</div>
