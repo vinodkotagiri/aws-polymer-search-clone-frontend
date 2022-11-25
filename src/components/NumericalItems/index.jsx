@@ -11,7 +11,7 @@ const NumericalItems = ({ data }) => {
 	return (
 		<>
 			<div className='bg-white mx-2 flex items-center  cursor-pointer'>
-				<div className='w-[6px] bg-blue-500 h-10 rounded-l-md' />
+				<div className='w-[6px] bg-orange-500 h-10 rounded-l-md' />
 				<div
 					className='flex justify-between flex-1 px-3 text-xs text-gray-600 font-medium cursor-pointer'
 					onClick={() => {
@@ -23,7 +23,7 @@ const NumericalItems = ({ data }) => {
 				</div>
 			</div>
 			<div className='bg-white mx-2 flex items-center  cursor-pointer'>
-				<div className='w-[6px] bg-blue-500 h-10 rounded-l-md' />
+				<div className='w-[6px] bg-yellow-500 h-10 rounded-l-md' />
 				<div
 					className='flex justify-between flex-1 px-3 text-xs text-gray-600 font-medium cursor-pointer'
 					onClick={() => {
@@ -35,7 +35,7 @@ const NumericalItems = ({ data }) => {
 				</div>
 			</div>
 			<div className='bg-white mx-2 flex items-center  cursor-pointer'>
-				<div className='w-[6px] bg-blue-500 h-10 rounded-l-md' />
+				<div className='w-[6px] bg-green-500 h-10 rounded-l-md' />
 				<div
 					className='flex justify-between flex-1 px-3 text-xs text-gray-600 font-medium cursor-pointer'
 					onClick={() => {
@@ -47,7 +47,7 @@ const NumericalItems = ({ data }) => {
 				</div>
 			</div>
 			<div className='bg-white mx-2 flex items-center  cursor-pointer'>
-				<div className='w-[6px] bg-blue-500 h-10 rounded-l-md' />
+				<div className='w-[6px] bg-red-500 h-10 rounded-l-md' />
 				<div
 					className='flex justify-between flex-1 px-3 text-xs text-gray-600 font-medium cursor-pointer'
 					onClick={() => {
