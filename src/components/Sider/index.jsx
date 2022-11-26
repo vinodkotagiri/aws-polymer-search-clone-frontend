@@ -31,7 +31,6 @@ const Sider = ({ source }) => {
 	const { data: links, isLoading: isLinksLoading } = useGetLinksDataQuery()
 	const { data: booleans, isLoading: isBooleansLoading } = useGetBooleansDataQuery()
 	const { data: dates, isLoading: isDatesLoading } = useGetDatesDataQuery()
-
 	const ref = useRef(null)
 	useClickOutSide(ref, () => setSearchSelected(false))
 	const dispatch = useDispatch()
@@ -43,7 +42,7 @@ const Sider = ({ source }) => {
 		dispatch(addBooleansData(booleans))
 	}, [categories, numericals, links, dates, booleans])
 	return (
-		<div className='w-full border-r-2 h-screen bg-gray-100 flex flex-col pr-6 overflow-y-scroll overflow-x-hidden sticky left-0 top-[calc(100vh-56px)]'>
+		<aside className='w-full border-r-2 h-screen bg-gray-100 flex flex-col pr-6 overflow-y-scroll overflow-x-hidden sticky left-0 top-0 z-[40]'>
 			{/* SEARCH BAR */}
 			<div
 				ref={ref}
@@ -118,13 +117,25 @@ const Sider = ({ source }) => {
 			{isBooleansLoading ? (
 				<Spinner />
 			) : (
-				<div className='flex flex-col mx-4 my-3 w-full gap-2'>
+				<div className='flex flex-col mx-4 mt-3 w-full gap-2'>
 					{booleans?.map((num, index) => (
 						<SiderItem data={num} key={index} />
 					))}
 				</div>
 			)}
-		</div>
+			<div className='flex w-full items-center justify-center pb-6'>
+				<button
+					className=' bg-blue-700 h-8 flex items-center text-sm text-white px-4 rounded-md hover:bg-black gap-2 mt-20'
+					onClick={() => window.open('https://www.polymersearch.com', '_blank')}>
+					<img
+						className='w-5'
+						src='https://cdn.polymersearch.com/assets/img/polymer-logo-animated-white-64px-2.a6f7303b.gif'
+						alt='pol-logo'
+					/>
+					Built with Polymer
+				</button>
+			</div>
+		</aside>
 	)
 }
 

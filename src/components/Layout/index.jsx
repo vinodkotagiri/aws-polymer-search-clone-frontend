@@ -3,15 +3,17 @@ import Header from '../Header'
 import Sider from '../Sider'
 const Layout = ({ children }) => {
 	return (
-		<div className='w-screeen h-screen'>
+		<>
 			<Header />
-			<div className='flex '>
-				<div className='w-[20%]'>
-					<Sider />
+			<div className='w-screen h-screen'>
+				<div className='flex '>
+					<div className='w-[320px]'>
+						<Sider />
+					</div>
+					<div className='w-[calc(100vw-320px)]'>{children}</div>
 				</div>
-				<div className='flex-1'>{children}</div>
 			</div>
-		</div>
+		</>
 	)
 }
 

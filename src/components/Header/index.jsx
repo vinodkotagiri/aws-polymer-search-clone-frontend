@@ -49,7 +49,7 @@ const Header = () => {
 			</div>
 			<AiOutlineMenu size={24} className='md:hidden float-right mr-3' onClick={() => setOpenSideMenu(true)} />
 			<div
-				className={`w-[200px] h-screen bg-white absolute top-0 right-0 px-1 flex ${
+				className={`md:hidden w-[200px] h-screen bg-white absolute top-0 right-0 px-1 flex ${
 					openSideMenu ? 'right-0' : 'right-[-200px]'
 				} ease-in-out duration-300`}>
 				<AiOutlineClose
