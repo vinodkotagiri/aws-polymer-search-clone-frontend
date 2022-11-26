@@ -1,12 +1,36 @@
+/* eslint-disable eqeqeq */
 import React, { useRef, useState } from 'react'
 import useClickOutSide from '../../helpers/useClickOutside'
 import { FiSearch } from 'react-icons/fi'
+import { useSelector } from 'react-redux'
 const FilterModal = ({ filters }) => {
 	const [searchSelected, setSearchSelected] = useState(false)
+	const [selectedFilters, setSelectedFilters] = useState([])
 	const searchRef = useRef(null)
+	const reposData = useSelector((state) => state.repos.repos)
 	useClickOutSide(searchRef, () => setSearchSelected(false))
-	const handleSelection=(item)=>{
-
+	const handleSelection = (selection) => {
+		console.log(filters.slug)
+		console.log(selection.item)
+		let filteredData
+		if (filters.slug === 'license') {
+			filteredData = reposData.filter((data) => data.license?.name === selection.item)
+		} else if (filters.slug === 'topics') {
+			filteredData = reposData.filter(
+				(data) =>
+					data.topics.join(',').split(',').includes(selection.item) ||
+					data.topics.join(',').split(',') == selection.item
+			)
+		} else if (filters.slug === '') {
+			filteredData = reposData.filter((data) => data.name.split('-').join(',') === selection.item)
+		} else if (filters.slug === 'created_at' || filters.slug === 'updated_at' || filters.slug === 'pushed_at') {
+			filteredData = reposData.filter(
+				(data) => new Date(`${data.created_at}`).toLocaleString().split(',')[0] == '23/3/2010'
+			)
+		} else {
+			filteredData = reposData.filter((data) => `${data[filters.slug]}` == selection.item)
+		}
+		console.log(filteredData)
 	}
 	return (
 		<div className='w-[95%] h-[420px] rounded-lg shadow-lg bg-white  overflow-y-scroll'>
@@ -34,7 +58,11 @@ const FilterModal = ({ filters }) => {
 			</div>
 			<div className='p-3 flex  gap-2 flex-wrap '>
 				{filters.items.map((item, index) => (
-					<div className='bg-blue-300 px-3 rounded-full text-gray-800 text-sm flex gap-3 my-1 cursor-pointer hover:bg-blue-400' onClick={()=>{handleSelection(item.item)}}>
+					<div
+						className='bg-blue-300 px-3 rounded-full text-gray-800 text-sm flex gap-3 my-1 cursor-pointer hover:bg-blue-400'
+						onClick={() => {
+							handleSelection(item)
+						}}>
 						<div>{item.item}</div>
 						<div className='font-semibold'>{item.count}</div>
 					</div>

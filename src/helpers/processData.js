@@ -8,5 +8,5 @@ export function processData(data) {
 	for (let key of Object.keys(dataMap)) {
 		items.push({ item: key, count: dataMap[key] })
 	}
-	return { name: data.name, items: items }
+	return { name: data.name, slug: data.slug, items: items }
 }

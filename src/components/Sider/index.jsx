@@ -24,7 +24,7 @@ import {
 	useGetBooleansDataQuery,
 	useGetDatesDataQuery,
 } from '../../redux/reducers/apiCore'
-const Sider = ({ source }) => {
+const Sider = () => {
 	const [searchSelected, setSearchSelected] = useState(false)
 	const { data: categories, isLoading: isCategoriesLoading } = useGetCategoriesDataQuery()
 	const { data: numericals, isLoading: isNumericalsLoading } = useGetNumericalsDataQuery()

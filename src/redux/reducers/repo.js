@@ -7,7 +7,9 @@ const initialState = {
 	booleans: null,
 	dates: null,
 	filters: null,
-	selectedFiltersCount: 0,
+	selectedData: [],
+	open: false,
+	chartData: {},
 }
 const repoSlice = createSlice({
 	name: 'repo',
@@ -37,11 +39,19 @@ const repoSlice = createSlice({
 		removeFiltersData: (state) => {
 			state.filters = null
 		},
-		incSelectedFiltersCount: (state) => {
-			state.selectedFiltersCount++
+		addSelectedData: (state, action) => {
+			state.filters.push(action.payload)
 		},
-		decSelectedFiltersCount: (state) => {
-			state.selectedFiltersCount = state.selectedFiltersCount <= 0 ? 0 : state.selectedFiltersCount--
+		removeSelectedData: (state) => {},
+		toggleOpen: (state) => {
+			state.open = !state.open
+		},
+		setChartData: (state, action) => {
+			state.chartData = action.payload
+		},
+		removeChartData: (state) => {
+			state.chartData.x = []
+			state.chartData.y = []
 		},
 	},
 })
@@ -54,7 +64,9 @@ export const {
 	addBooleansData,
 	addFiltersData,
 	removeFiltersData,
-	incSelectedFiltersCount,
-	decSelectedFiltersCount,
+	addSelectedData,
+	toggleOpen,
+	setChartData,
+	removeChartData,
 } = repoSlice.actions
 export default repoSlice.reducer

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { processData } from '../../helpers/processData'
-import { addFiltersData, removeFiltersData } from '../../redux/reducers/repo'
+import { addFiltersData, removeFiltersData, toggleOpen } from '../../redux/reducers/repo'
 const SiderItem = ({ data }) => {
 	const [dataItems, setDataItems] = useState({})
 	const [selected, setSelected] = useState(false)
 	const filters = useSelector((state) => state.repos.filters)
+
 	const dispatch = useDispatch()
 
 	useEffect(() => {
@@ -15,9 +16,11 @@ const SiderItem = ({ data }) => {
 	const handleItemClick = () => {
 		if (!selected && filters === null) {
 			dispatch(addFiltersData(dataItems))
+			dispatch(toggleOpen())
 			setSelected(!selected)
 		} else {
 			dispatch(removeFiltersData())
+			dispatch(toggleOpen())
 			setSelected(!selected)
 		}
 	}

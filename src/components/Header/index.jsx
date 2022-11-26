@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import awsLogo from '../../assets/images/aws_logo.png'
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai'
-import { Link } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { ReactComponent as DataLogo } from '../../assets/svg/datagrid.svg'
 import { ReactComponent as InsightsLogo } from '../../assets/svg/insights.svg'
 const Header = () => {
 	const [active, setActive] = useState({ data: true })
 	const [openSideMenu, setOpenSideMenu] = useState(false)
+	const navigate = useNavigate()
+
 	return (
 		<nav className='w-full h-14 flex items-center shadow-sm border-2 pr-3 bg-gray-50 sticky top-0 left-0 z-50'>
 			<Link to='/' className='border-r-2 h-full flex items-center justify-center w-14 cursor-pointer'>
@@ -21,7 +23,10 @@ const Header = () => {
 						className={`flex items-center gap-2 text-sm p-1 px-2 rounded-full ${
 							active.data ? 'bg-black text-white' : ''
 						}`}
-						onClick={() => setActive({ data: true })}>
+						onClick={() => {
+							setActive({ data: true })
+							navigate('/')
+						}}>
 						<DataLogo className='h-6' fill={`${active.data ? 'white' : ''}`} />
 						Data
 					</button>
@@ -29,7 +34,10 @@ const Header = () => {
 						className={`flex items-center gap-2 text-sm p-1 px-2 rounded-full  ${
 							active.insights ? 'bg-black text-white' : ''
 						}`}
-						onClick={() => setActive({ insights: true })}>
+						onClick={() => {
+							setActive({ insights: true })
+							navigate('/insights')
+						}}>
 						<InsightsLogo className='h-6' fill={`${active.insights ? 'white' : ''}`} />
 						Insights
 					</button>
