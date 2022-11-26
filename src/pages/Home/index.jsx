@@ -1,22 +1,31 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Layout from '../../components/Layout'
 import { useGetReposDataQuery } from '../../redux/reducers/apiCore'
-import repo, { addReposData } from '../../redux/reducers/repo'
+import { addReposData } from '../../redux/reducers/repo'
 import Spinner from '../../components/Spinner'
 import Card from '../../components/Card'
 import CopyModal from '../../components/copyModal'
+import FilterModal from '../../components/filterModal'
 const HomePage = () => {
 	const [showCopyModal, setShowCopyModal] = useState(false)
 	const dispatch = useDispatch()
 	const { data, isLoading } = useGetReposDataQuery()
 	const repos = useSelector((state) => state.repos.repos)
+	const filters = useSelector((state) => state.repos.filters)
+	const [showModal, setShowModal] = useState(false)
 	useEffect(() => {
 		dispatch(addReposData(data))
 	}, [data])
 	return (
 		<Layout>
 			<div className='w-full h-full bg-gray-200 relative'>
+				{filters && (
+					<div className='w-full h-screen absolute top-0 left-0 z-50 bg-[#00000090] flex items-center justify-start'>
+						<FilterModal filters={filters} />
+					</div>
+				)}
 				{showCopyModal && <CopyModal setShowCopyModal={setShowCopyModal} />}
 				{/* FIXED BANNER */}
 				<div className='h-[150px] w-full  bg-white sticky top-[56px] flex items-center justify-center text-xl font-medium'>
@@ -34,6 +43,7 @@ const HomePage = () => {
 					<Spinner size={48} />
 				) : (
 					<main className='w-full flex pt-4 px-12 gap-4 flex-wrap'>
+						<div className='flex w-full items-center relative'></div>
 						{repos?.map((item, index) => (
 							<Card data={item} key={index} setShowCopyModal={setShowCopyModal} />
 						))}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { IoMdOpen, IoMdLink } from 'react-icons/io'
 const Card = ({ data, setShowCopyModal }) => {
 	//Function to handle copy link to clipboard

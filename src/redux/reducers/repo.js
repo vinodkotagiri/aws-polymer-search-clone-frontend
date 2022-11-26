@@ -1,11 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
-	repos: [],
-	categories: [],
-	numericals: [],
-	links: [],
-	booleans: [],
-	dates: [],
+	repos: null,
+	categories: null,
+	numericals: null,
+	links: null,
+	booleans: null,
+	dates: null,
+	filters: null,
+	selectedFiltersCount: 0,
 }
 const repoSlice = createSlice({
 	name: 'repo',
@@ -29,8 +31,30 @@ const repoSlice = createSlice({
 		addBooleansData: (state, action) => {
 			state.booleans = action.payload
 		},
+		addFiltersData: (state, action) => {
+			state.filters = action.payload
+		},
+		removeFiltersData: (state) => {
+			state.filters = null
+		},
+		incSelectedFiltersCount: (state) => {
+			state.selectedFiltersCount++
+		},
+		decSelectedFiltersCount: (state) => {
+			state.selectedFiltersCount = state.selectedFiltersCount <= 0 ? 0 : state.selectedFiltersCount--
+		},
 	},
 })
-export const { addReposData, addCategoriesData, addNumericalsData, addLinksData, addDatesData, addBooleansData } =
-	repoSlice.actions
+export const {
+	addReposData,
+	addCategoriesData,
+	addNumericalsData,
+	addLinksData,
+	addDatesData,
+	addBooleansData,
+	addFiltersData,
+	removeFiltersData,
+	incSelectedFiltersCount,
+	decSelectedFiltersCount,
+} = repoSlice.actions
 export default repoSlice.reducer
