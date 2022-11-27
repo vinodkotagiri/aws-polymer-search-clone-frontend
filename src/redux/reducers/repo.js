@@ -10,6 +10,7 @@ const initialState = {
 	selectedData: [],
 	open: false,
 	chartData: {},
+	flag: false,
 }
 const repoSlice = createSlice({
 	name: 'repo',
@@ -53,6 +54,9 @@ const repoSlice = createSlice({
 			state.chartData.x = []
 			state.chartData.y = []
 		},
+		setFlag: (state, action) => {
+			state.flag = action.payload
+		},
 	},
 })
 export const {
@@ -68,5 +72,6 @@ export const {
 	toggleOpen,
 	setChartData,
 	removeChartData,
+	setFlag,
 } = repoSlice.actions
 export default repoSlice.reducer

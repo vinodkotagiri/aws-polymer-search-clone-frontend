@@ -1,7 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setChartData, removeChartData } from '../../redux/reducers/repo'
-const ChartModal = ({ type = 'bar' }) => {
+const ChartModal = ({ type }) => {
 	const repoData = useSelector((state) => state.repos.repos)
 	const dispatch = useDispatch()
 	const xref = useRef(null)
@@ -34,11 +35,20 @@ const ChartModal = ({ type = 'bar' }) => {
 		xref.current.value = []
 		yref.current.value = []
 	}
+
 	return (
 		<div className='h-[70%] '>
-			<div className='text-center'>Column & Bar Chart</div>
+			{type === 'bar' && <div className='text-center mb-3'> Column & Bar Chart</div>}
+			{type === 'scatter' && <div className='text-center mb-3'> Scatter Plot</div>}
+			{type === 'line' && <div className='text-center mb-3'> Line Plot</div>}
+			{type === 'pie' && <div className='text-center mb-3'> Pie Plot</div>}
 			<div className='flex  flex-col gap-3'>
-				<select className='w-full px-4 py-2' onChange={(e) => setX(e.target.value.split(','))} ref={xref}>
+				<select
+					className='w-full px-4 py-2'
+					onChange={(e) => {
+						setX({ name: e.target.options[e.target.options.selectedIndex].text, values: e.target.value.split(',') })
+					}}
+					ref={xref}>
 					<option value={[]}>X-Axis</option>
 					<option value={services}>Service</option>
 					<option value={license}>License</option>
@@ -48,7 +58,15 @@ const ChartModal = ({ type = 'bar' }) => {
 					<option value={watchers}>Watchers</option>
 					<option value={createdAt}>Created At</option>
 				</select>
-				<select className='w-full px-4 py-2 ' onChange={(e) => setY(e.target.value.split(','))} ref={yref}>
+				<select
+					className='w-full px-4 py-2 '
+					onChange={(e) =>
+						setY({
+							name: e.target.options[e.target.options.selectedIndex].text,
+							values: e.target.value.split(','),
+						})
+					}
+					ref={yref}>
 					<option value={[]}>Y-Axis</option>
 					<option value={services}>Service</option>
 					<option value={license}>License</option>

@@ -1,14 +1,18 @@
-import React, { useEffect, useState } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from 'react'
 import Layout from '../../components/Layout'
 import { ReactComponent as AddInsightsLogo } from '../../assets/svg/addInsights.svg'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { setFlag } from '../../redux/reducers/repo'
 import Chart from '../../components/Chart'
 
 const InsightsPage = () => {
 	const chartData = useSelector((state) => state.repos.chartData)
-	const [flag, setFlag] = useState(false)
+	const flag = useSelector((state) => state.repos.flag)
+	const dispatch = useDispatch()
 	useEffect(() => {
-		setFlag(chartData.x.length > 0 && chartData.y.length > 0)
+		if (chartData?.x && chartData?.y)
+			dispatch(setFlag(chartData?.x.values.length > 0 && chartData?.y.values.length > 0))
 	}, [chartData])
 	return (
 		<Layout src='insights'>
@@ -27,7 +31,7 @@ const InsightsPage = () => {
 					</div>
 				) : (
 					<div className='w-full h-full bg-white'>
-						<Chart />
+						<Chart type={chartData.type} />
 					</div>
 				)}
 			</div>
