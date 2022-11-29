@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 /* eslint-disable eqeqeq */
 import React, { useEffect, useRef, useState } from 'react'
 import useClickOutSide from '../../helpers/useClickOutside'

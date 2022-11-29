@@ -22,7 +22,7 @@ const HomePage = () => {
 	}, [data])
 	useEffect(() => {
 		setDataToRender(selectedData.length > 0 ? selectedData : repos)
-	}, [selectedData])
+	}, [selectedData, repos])
 	return (
 		<Layout>
 			<div className='w-full h-full bg-gray-200 relative'>
