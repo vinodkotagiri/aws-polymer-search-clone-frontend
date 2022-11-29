@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef, useState } from 'react'
 import { FiSearch } from 'react-icons/fi'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { ReactComponent as CategoriesLogo } from '../../assets/svg/categoriesLogo.svg'
 import { ReactComponent as NumericalsLogo } from '../../assets/svg/numericalsLogo.svg'
 import { ReactComponent as UrlsLogo } from '../../assets/svg/urlsLogo.svg'
@@ -15,6 +15,8 @@ import {
 	addDatesData,
 	addLinksData,
 	addNumericalsData,
+	addSelectedData,
+	removeSelectedData,
 } from '../../redux/reducers/repo'
 import Spinner from '../Spinner'
 import {
@@ -34,6 +36,7 @@ const Sider = () => {
 	const ref = useRef(null)
 	useClickOutSide(ref, () => setSearchSelected(false))
 	const dispatch = useDispatch()
+	const repos = useSelector((state) => state.repos.repos)
 	useEffect(() => {
 		dispatch(addCategoriesData(categories))
 		dispatch(addNumericalsData(numericals))
@@ -51,7 +54,16 @@ const Sider = () => {
 				}`}
 				onClick={() => setSearchSelected(true)}>
 				<FiSearch className='mx-2 text-gray-700' size={20} />
-				<input className='outline-none placeholder:text-sm' placeholder='Search' />
+				<input
+					className='outline-none placeholder:text-sm'
+					placeholder='Search'
+					onChange={(e) => {
+						const search = e.target.value
+						const filterData = repos.filter((item) => item.name.includes(search))
+						dispatch(addSelectedData(filterData))
+						if (search === '') dispatch(removeSelectedData())
+					}}
+				/>
 			</div>
 			{/* CATEGORIES */}
 			<div className='flex mx-4 mt-3 gap-2'>

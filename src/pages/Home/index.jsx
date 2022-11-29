@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Layout from '../../components/Layout'
 import { useGetReposDataQuery } from '../../redux/reducers/apiCore'
-import { addReposData } from '../../redux/reducers/repo'
+import { addReposData, removeSelectedData } from '../../redux/reducers/repo'
 import Spinner from '../../components/Spinner'
 import Card from '../../components/Card'
 import CopyModal from '../../components/copyModal'
@@ -14,10 +14,15 @@ const HomePage = () => {
 	const { data, isLoading } = useGetReposDataQuery()
 	const repos = useSelector((state) => state.repos.repos)
 	const filters = useSelector((state) => state.repos.filters)
-	const [showModal, setShowModal] = useState(false)
+	const selectedData = useSelector((state) => state.repos.selectedData)
+	const [dataTorender, setDataToRender] = useState([])
+
 	useEffect(() => {
 		dispatch(addReposData(data))
 	}, [data])
+	useEffect(() => {
+		setDataToRender(selectedData.length > 0 ? selectedData : repos)
+	}, [selectedData])
 	return (
 		<Layout>
 			<div className='w-full h-full bg-gray-200 relative'>
@@ -33,10 +38,12 @@ const HomePage = () => {
 				</div>
 				{/* FIXED TOPBAR WITH SELECT */}
 				<div className='h-[52px] w-full bg-gray-100 sticky top-[206px] flex items-center justify-end text-md font-medium px-6 gap-3'>
-					<small className='text-gray-600'>100 Results</small>
-					<select className='p-2 pl-6 rounded-md pr-3'>
-						<option>Sort By</option>
-					</select>
+					<small className='text-gray-600'>{dataTorender?.length} Results</small>
+					{selectedData?.length > 0 && (
+						<button className='p-2 pl-6 rounded-md pr-3' onClick={() => dispatch(removeSelectedData())}>
+							Clear
+						</button>
+					)}
 				</div>
 				{/* MAIN CARDS DISPLAY AREA */}
 				{isLoading ? (
@@ -44,7 +51,7 @@ const HomePage = () => {
 				) : (
 					<main className='w-full flex pt-4 px-12 gap-4 flex-wrap'>
 						<div className='flex w-full items-center relative'></div>
-						{repos?.map((item, index) => (
+						{dataTorender?.map((item, index) => (
 							<Card data={item} key={index} setShowCopyModal={setShowCopyModal} />
 						))}
 					</main>

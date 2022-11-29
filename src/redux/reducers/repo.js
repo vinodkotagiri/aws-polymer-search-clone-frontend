@@ -41,9 +41,11 @@ const repoSlice = createSlice({
 			state.filters = null
 		},
 		addSelectedData: (state, action) => {
-			state.filters.push(action.payload)
+			state.selectedData = action.payload
 		},
-		removeSelectedData: (state) => {},
+		removeSelectedData: (state) => {
+			state.selectedData = []
+		},
 		toggleOpen: (state) => {
 			state.open = !state.open
 		},
@@ -69,6 +71,7 @@ export const {
 	addFiltersData,
 	removeFiltersData,
 	addSelectedData,
+	removeSelectedData,
 	toggleOpen,
 	setChartData,
 	removeChartData,

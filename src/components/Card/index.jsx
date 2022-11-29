@@ -1,6 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { IoMdOpen, IoMdLink } from 'react-icons/io'
+import { useSelector } from 'react-redux'
+import { addSelectedData } from '../../redux/reducers/repo'
+import RepoDetailsModal from '../RepoDetailsModal'
+
 const Card = ({ data, setShowCopyModal }) => {
+	const repo = useSelector((state) => state.repos.repos)
+	const [openDetails, setOpenDetails] = useState(false)
 	//Function to handle copy link to clipboard
 	function handleShare() {
 		navigator.clipboard.writeText(data.clone_url)
@@ -11,7 +17,10 @@ const Card = ({ data, setShowCopyModal }) => {
 	}
 	return (
 		<>
-			<div className='w-[360px]  bg-white rounded-md shadow-md p-3 flex flex-col'>
+			{openDetails && <RepoDetailsModal repo={data} setOpenDetails={setOpenDetails} />}
+			<div
+				className='w-[360px]  bg-white rounded-md shadow-md p-3 flex flex-col cursor-pointer'
+				onClick={() => setOpenDetails(true)}>
 				<p className='py-2 px-3 text-md tracking-wide font-medium text-gray-700 '>{data.name}</p>
 				<p className='px-3 text-xs font-medium text-gray-600 mb-3'>{data.description}</p>
 				<div className='flex text-gray-900 justify-start text-sm font-medium mt-6 gap-6'>
@@ -33,12 +42,16 @@ const Card = ({ data, setShowCopyModal }) => {
 						<small className='text-gray-700 font-medium'>{data.stargazers_count}</small>
 					</div>
 					<div className='flex items-center justify-between px-4'>
-						<small className='text-gray-700 font-medium mb-3'>Serch keywords:</small>
+						<small className='text-gray-700 font-medium mb-3'>Search keywords:</small>
 						<small className='text-gray-700 font-medium flex gap-2 flex-wrap justify-end'>
 							{data.name.split('-').map((k, i) => (
 								<small
 									key={i}
-									className='bg-purple-200 text-blue-500 px-3 rounded-full py-1 cursor-pointer hover:bg-purple-300'>
+									className='bg-purple-200 text-blue-500 px-3 rounded-full py-1 cursor-pointer hover:bg-purple-300'
+									onClick={(e) => {
+										e.stopPropagation()
+										addSelectedData(repo.filter((item) => item.name.includes(k)))
+									}}>
 									{k}
 								</small>
 							))}

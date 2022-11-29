@@ -6,7 +6,6 @@ const SiderItem = ({ data }) => {
 	const [dataItems, setDataItems] = useState({})
 	const [selected, setSelected] = useState(false)
 	const filters = useSelector((state) => state.repos.filters)
-
 	const dispatch = useDispatch()
 
 	useEffect(() => {

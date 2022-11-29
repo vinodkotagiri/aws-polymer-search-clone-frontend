@@ -1,17 +1,16 @@
 /* eslint-disable eqeqeq */
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import useClickOutSide from '../../helpers/useClickOutside'
-import { FiSearch } from 'react-icons/fi'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { addSelectedData } from '../../redux/reducers/repo'
 const FilterModal = ({ filters }) => {
 	const [searchSelected, setSearchSelected] = useState(false)
 	const [selectedFilters, setSelectedFilters] = useState([])
+	const dispatch = useDispatch()
 	const searchRef = useRef(null)
 	const reposData = useSelector((state) => state.repos.repos)
 	useClickOutSide(searchRef, () => setSearchSelected(false))
 	const handleSelection = (selection) => {
-		console.log(filters.slug)
-		console.log(selection.item)
 		let filteredData
 		if (filters.slug === 'license') {
 			filteredData = reposData.filter((data) => data.license?.name === selection.item)
@@ -29,22 +28,27 @@ const FilterModal = ({ filters }) => {
 			)
 		} else {
 			filteredData = reposData.filter((data) => `${data[filters.slug]}` == selection.item)
+			setSelectedFilters(filteredData)
 		}
-		console.log(filteredData)
 	}
+	const handleChange = () => {}
+	useEffect(() => {
+		dispatch(addSelectedData(selectedFilters))
+	}, [selectedFilters])
 	return (
 		<div className='w-[95%] h-[420px] rounded-lg shadow-lg bg-white  overflow-y-scroll'>
 			<div className='text-xl font-medium h-12 w-full px-2  flex items-center sticky top-0 left-0 bg-white z-10'>
-				{filters.name}
+				{filters?.name}
 			</div>
-			<div className='w-full h-[76px] bg-gray-200 flex items-center justify-between px-6 sticky top-[48px]'>
+			{/* <div className='w-full h-[76px] bg-gray-200 flex items-center justify-between px-6 sticky top-[48px]'>
 				<div className='flex items-center gap-3'>
 					<div
 						ref={searchRef}
 						className={`flex px-1 py-4 items-center my-4 ml-4 h-10 bg-white border-[1px] rounded-lg ${
 							searchSelected ? 'border-blue-500' : ''
 						}`}
-						onClick={() => setSearchSelected(true)}>
+						onClick={() => setSearchSelected(true)}
+						onChange={handleChange}>
 						<FiSearch className='mx-2 text-gray-700' size={20} />
 						<input className='outline-none placeholder:text-sm' placeholder='Search' />
 					</div>
@@ -55,18 +59,20 @@ const FilterModal = ({ filters }) => {
 						<option>Sort by</option>
 					</select>
 				</div>
-			</div>
+			</div> */}
 			<div className='p-3 flex  gap-2 flex-wrap '>
-				{filters.items.map((item, index) => (
-					<div
-						className='bg-blue-300 px-3 rounded-full text-gray-800 text-sm flex gap-3 my-1 cursor-pointer hover:bg-blue-400'
-						onClick={() => {
-							handleSelection(item)
-						}}>
-						<div>{item.item}</div>
-						<div className='font-semibold'>{item.count}</div>
-					</div>
-				))}
+				{filters &&
+					filters?.items.map((item, index) => (
+						<div
+							key={index}
+							className='bg-blue-300 px-3 rounded-full text-gray-800 text-sm flex gap-3 my-1 cursor-pointer hover:bg-blue-400'
+							onClick={() => {
+								handleSelection(item)
+							}}>
+							<div>{item.item}</div>
+							<div className='font-semibold'>{item.count}</div>
+						</div>
+					))}
 			</div>
 		</div>
 	)
