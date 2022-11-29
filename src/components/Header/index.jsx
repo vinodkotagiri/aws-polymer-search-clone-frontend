@@ -10,10 +10,13 @@ const Header = () => {
 	const navigate = useNavigate()
 
 	const handleActive = (e) => {
-		if (e.target.innerText === 'Data') setActive({ data: true, insights: false })
-		else setActive({ insights: true, data: false })
-		if (!active.data && active.insights) navigate('/')
-		else navigate('/insights')
+		if (e.target.innerText === 'Data') {
+			setActive({ data: true, insights: false })
+			navigate('/')
+		} else {
+			setActive({ insights: true, data: false })
+			navigate('/insights')
+		}
 	}
 
 	return (
